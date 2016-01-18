@@ -29,6 +29,15 @@ function removeStuff(id) {
 	}
 }
 
+var EDIT_STUFF = 'EDIT_STUFF';
+
+function editStuff(id) {
+	return {
+		type: EDIT_STUFF,
+		id
+	}
+}
+
 function reducer(state = {stuffs: []}, action) {
 	switch(action.type) {
 		case ADD_STUFF:
@@ -38,6 +47,9 @@ function reducer(state = {stuffs: []}, action) {
 
 		case REMOVE_STUFF:
 			state = {...state, stuffs: state.stuffs.filter(function(x) { return x.id !== action.id})};
+			return state;
+
+		case EDIT_STUFF:
 			return state;
 
 		default:
@@ -54,31 +66,51 @@ store.dispatch(addStuff());
 store.dispatch(addStuff());
 store.dispatch(addStuff());
 
-StuffCard = function (props) {
-	var x = props.stuff;
+function IconButton(props) {
+	var {icon, onClick} = props;
+	return (
+		<a href="#" role="button" onClick={onClick}>
+			<span className={"glyphicon glyphicon-" + icon} aria-hidden="true"></span>
+		</a>
+	);
+}
+
+function Card(props) {
 	return (
 		<div className="col-xs-4">
 			<div className="thumbnail">
-				<div className="ar_wrapper ar_4_3_wrapper asd">
-					<div className="ar_main">
-						<img src={"/img/" + x.image_url} alt={x.name} />
-					</div>
-				</div>
-				<div className="caption">
-					<h3>{x.name}</h3>
-					<p>{x.description}</p>
-					<p>
-						<a href="#" className="btn btn-primary" role="button">Button</a>
-						<a href="#" className="btn btn-default" role="button">Button</a>
-						<a href="#" className="btn btn-danger" role="button" onClick={() => store.dispatch(removeStuff(x.id))}>Remove</a>
-					</p>
-				</div>
+				{props.children}
 			</div>
 		</div>
 	);
+}
+
+function StuffCard(props) {
+	var x = props.stuff;
+	return (
+		<Card>
+			<div className="ar_wrapper ar_4_3_wrapper asd">
+				<div className="ar_main">
+					<img src={"/img/" + x.image_url} alt={x.name} />
+				</div>
+			</div>
+			<div className="caption">
+					
+				<h3>
+					{x.name}
+					<span className="pull-right">
+							<IconButton icon="edit" onClick={() => store.dispatch(editStuff(x.id))} />
+							<IconButton icon="trash" onClick={() => store.dispatch(removeStuff(x.id))} />
+					</span>
+				</h3>
+
+				<p>{x.description}</p>
+			</div>
+		</Card>
+	);
 };
 
-StuffList = function (props) {
+function StuffList(props) {
 	xs = props.stuffs;
 	return (
 		<div className="container">
