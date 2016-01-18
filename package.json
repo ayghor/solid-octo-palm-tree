@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ayghor/solid-octo-palm-tree#readme",
   "dependencies": {
+    "bootstrap": "^3.3.6",
     "express": "^4.13.3",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
@@ -31,7 +32,16 @@
     "browserify": "^13.0.0"
   },
   "browserify": {
-    "extension": [ "jsx" ],
-    "transform": [ [ "babelify", { "presets": "react" } ] ]
+    "extension": [
+      "jsx"
+    ],
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": "react"
+        }
+      ]
+    ]
   }
 }
