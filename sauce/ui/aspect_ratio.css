@@ -1,0 +1,29 @@
+.ar_wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.ar_4_3_wrapper:after {
+  padding-top: 75%;
+  display: block;
+  content: '';
+}
+
+.asd {
+	width: 100%;
+	background: black;
+}
+
+.asd img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.ar_main {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+}
