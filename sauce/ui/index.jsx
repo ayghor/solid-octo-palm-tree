@@ -85,6 +85,16 @@ function Card(props) {
 	);
 }
 
+function NewStuffCard(props) {
+	return (
+		<Card>
+			<h1 className="text-center">
+				<IconButton icon="plus" onClick={() => store.dispatch(addStuff())} />
+			</h1>
+		</Card>
+	);
+}
+
 function StuffCard(props) {
 	var x = props.stuff;
 	return (
@@ -117,6 +127,7 @@ function StuffList(props) {
 			{xs.map(function (x) {
 				return (<StuffCard key={x.id} stuff={x} />);
 			})}
+			<NewStuffCard />
 		</div>
 	);
 }
