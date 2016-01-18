@@ -66,12 +66,26 @@ store.dispatch(addStuff());
 store.dispatch(addStuff());
 store.dispatch(addStuff());
 
+function Link(props) {
+	x = {...props,
+		onClick: (e) =>{
+			var r = props.onClick(e);
+			e.preventDefault();
+			return r;
+		}
+	};
+
+	return (
+		<a {...x} />
+	);
+}
+
 function IconButton(props) {
 	var {icon, onClick} = props;
 	return (
-		<a href="#" role="button" onClick={onClick}>
+		<Link role="button" onClick={onClick}>
 			<span className={"glyphicon glyphicon-" + icon} aria-hidden="true"></span>
-		</a>
+		</Link>
 	);
 }
 
