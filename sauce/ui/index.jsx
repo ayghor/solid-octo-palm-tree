@@ -57,7 +57,7 @@ function reducer(state = {stuffs: []}, action) {
 	}
 }
 
-store = createStore(reducer);
+var store = createStore(reducer);
 store.dispatch(addStuff());
 store.dispatch(addStuff());
 store.dispatch(addStuff());
