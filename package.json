@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watchify": "watchify static/index.jsx -o static/bundle.js -v",
+    "watchify": "watchify static/index.js -d -o static/bundle.js -v",
     "start": "node server.js"
   },
   "repository": {
