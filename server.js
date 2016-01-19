@@ -1,9 +1,22 @@
-var app = new (require('express'))()
+var express = require('express');
+var app = express();
 var port = 3000
 
-app.use(function (req, res) {
-	res.sendFile(__dirname + req.path);
+var api = require('./api');
+var concat = require('concat-stream');
+
+app.use('/api', function(req, res, next){
+  req.pipe(concat(function(data){
+    req.body = data.toString();
+    next();
+  }));
 });
+
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap'));
+app.use('/api', api);
+app.use('/', express.static(__dirname + '/static'));
+
+app.get('/', (req, res) => res.sendFile('/static/index.html'));
 
 app.listen(port, function(error) {
   if (error) {

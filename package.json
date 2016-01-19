@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watchify": "watchify sauce/ui/index.jsx -o build/ui/bundle.js -v",
+    "watchify": "watchify static/index.jsx -o static/bundle.js -v",
     "start": "node server.js"
   },
   "repository": {
@@ -20,15 +20,18 @@
   "homepage": "https://github.com/ayghor/solid-octo-palm-tree#readme",
   "dependencies": {
     "bootstrap": "^3.3.6",
+    "concat-stream": "^1.5.1",
     "express": "^4.13.3",
+    "pg-promise": "^2.9.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-redux": "^4.0.6",
     "redux": "^3.0.5"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
     "babel-preset-react": "^6.3.13",
-    "babel-preset-stage-2": "^6.3.13",
     "babelify": "^7.2.0",
     "browserify": "^13.0.0"
   },
@@ -40,7 +43,11 @@
       [
         "babelify",
         {
-          "presets": ["react", "stage-2"]
+          "presets": [
+            "react",
+            "stage-0",
+            "es2015"
+          ]
         }
       ]
     ]
