@@ -1,6 +1,6 @@
 import React from 'react';
-import './actions';
-import './store';
+import * as A from './actions';
+import { store } from  './store';
 
 function Link(props) {
 	var x = {...props,
@@ -26,7 +26,7 @@ function IconButton(props) {
 	);
 }
 
-export function Card(props) {
+function Card(props) {
 	return (
 		<div className="col-xs-4">
 			<div className="thumbnail">
@@ -37,42 +37,45 @@ export function Card(props) {
 }
 
 function NewStuffCard(props) {
-	{onClick} = props;
+	var {onClick} = props;
 
 	return (
 		<Card>
 			<h1 className="text-center">
-				<IconButton icon="plus" onClick={onClick} />
+				<IconButton icon="plus" onClick={ onClick } />
 			</h1>
 		</Card>
 	);
 }
 
 function StuffCard(props) {
-	var {id, text, new} = props;
+	var { id, text } = props;
 
 	return (
 		<Card>
-			<textarea onChange={e => store.dispatch(updateStuff(id, text, new))}>
+			<textarea>
 				text
 			</textarea>
 		</Card>
 	);
 }
 
-function StuffGrid(props) {
-	var {stuffs} = props;
+export function StuffGrid(props) {
+	var { store } = props;
+	var state = store.getState();
 
-	var cards = stuffs.map(function (stuff) {
+	console.log(state);
+
+	var cards = state.stuffs.map(function (stuff) {
 		return (
-			<StuffCard key={stuff.id} stuff={stuff} />
+			<StuffCard key={ stuff.id } stuff={ stuff } />
 		);
 	});
 	
 	return (
 		<div className="container">
-			{cards}
-			<NewStuffCard />
+			{ cards }
+			<NewStuffCard onClick = { () => store.dispatch(A.createStuff()) } />
 		</div>
 	);
 }
