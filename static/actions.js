@@ -7,7 +7,7 @@ export const FAILED = 'FAILED';
 
 var nextRequestId = 1;
 
-function asd(p, dispatch, T, k) {
+function asd(p, dispatch, T, k, successAction = undefined) {
 	var requestId = nextRequestId++;
 	
 	dispatch({
@@ -26,25 +26,23 @@ function asd(p, dispatch, T, k) {
 		
 		else
 			res.json().then(j => {
-				var a = {
+				dispatch({
 					type: T,
 					status: OK,
 					[k]: j,
 					requestId
-				};
+				});
 
-				dispatch(a);
-
-				console.log('a', a);
-				}
-			);
+				if (successAction)
+					dispatch(successAction);
+			});
 	});
 }
 
 export const CREATE_STUFF = 'CREATE_STUFF';
 
 export function createStuff() {
-	return dispatch => asd(API.createStuff(), dispatch, CREATE_STUFF, 'stuff').then(() => dispatch(readStuff()));
+	return dispatch => asd(API.createStuff(), dispatch, CREATE_STUFF, 'stuff', readStuff());
 }
 
 export const READ_STUFF = 'READ_STUFF';
@@ -56,11 +54,11 @@ export function readStuff() {
 export const UPDATE_STUFF = 'UPDATE_STUFF';
 
 export function updateStuff(id, values) {
-	return dispatch => asd(API.updateStuff(id, values), dispatch, UPDATE_STUFF, 'stuff').then(() => dispatch(readStuff()));
+	return dispatch => asd(API.updateStuff(id, values), dispatch, UPDATE_STUFF, 'stuff', readStuff());
 }
 
 export const DESTROY_STUFF = 'DESTROY_STUFF';
 
 export function destroyStuff(id) {
-	return dispatch => asd(API.DESTROYStuff(id), dispatch, DESTROY_STUFF, 'stuff').then(() => dispatch(readStuff()));
+	return dispatch => asd(API.DESTROYStuff(id), dispatch, DESTROY_STUFF, 'stuff', readStuff());
 }
