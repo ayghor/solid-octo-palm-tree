@@ -4,15 +4,19 @@ import * as A from './actions';
 function stuff(state = {}, action) {
 }
 
-function stuffs(state = [], action) {
+function stuffs(state = {}, action) {
 	switch (action.type) {
 
 	case A.READ_STUFF:
 		switch (action.status) {
 			
-			case A.OK:
+			case A.OK:	
+				var nextState = {};
+				action.stuffs.forEach(x => nextState[x.id] = x);
+
 				console.log('refreshed');
-				return action.stuffs;
+
+				return nextState;
 				
 			case A.FAILED:
 				console.log('failed to refresh');

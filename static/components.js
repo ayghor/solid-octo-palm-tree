@@ -64,11 +64,14 @@ export function StuffGrid(props) {
 
 	console.log(state);
 
-	var cards = state.stuffs.map(function (stuff) {
-		return (
+	var cards = [];
+
+	for (var k in state.stuffs) {
+		var stuff = state.stuffs[k];
+		cards.push((
 			<StuffCard key={ stuff.id } stuff={ stuff } />
-		);
-	});
+		));
+	}
 	
 	return (
 		<div className="container">
