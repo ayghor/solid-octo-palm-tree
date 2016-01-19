@@ -53,16 +53,37 @@ function stuffsPendingCreate(state = 0, action) {
 function stuffPendingUpdate(state = {}, action) {
 	switch (action.type) {
 
+	case A.CHANGE_STUFF:
+
+		return {
+			...state,
+			dirty: true,
+			text: action.text
+		}
+
+	case A.ROLLBACK_STUFF:
+
+		return {
+			...state,
+			dirty: false
+		};
+
 	case A.UPDATE_STUFF:
 		switch (action.status) {
 
 			case A.OK:
 				console.log('updated stuff ' + action.id);
-				return action.requestId < state.lastRequestId ? state : undefined;
+
+				return {
+					...state,
+					dirty: false
+				};
+
 
 			case A.PENDING:
 				return {
-					text: action.text,
+					...state,
+					dirty: true,
 					lastRequestId: action.requestId
 				}
 
@@ -78,6 +99,8 @@ function stuffPendingUpdate(state = {}, action) {
 function stuffsPendingUpdate(state = {}, action) {
 	switch (action.type) {
 
+	case A.CHANGE_STUFF:
+	case A.ROLLBACK_STUFF:
 	case A.UPDATE_STUFF:
 		var nextState = {
 			...state,

@@ -53,12 +53,45 @@ function NewStuffCard(props) {
 }
 
 function StuffCard(props) {
-	var { id, stuff, onChange } = props;
+	var { id, stuff, pendingStuff, onChange, onRollback, onCommit, onTrash } = props;
+	var controls, content;
+
+	console.log('pendingStuff', pendingStuff);
+
+	if (pendingStuff && pendingStuff.dirty) {
+		controls = (
+			<span>
+				<IconButton icon = 'ok' onClick = { onCommit } />
+				<IconButton icon = 'remove' onClick = { onRollback } />
+			</span>
+		);
+
+		content = (
+			<textarea value = { pendingStuff.text } onChange = { onChange } />
+		);
+	}
+
+	else {
+		controls = (
+			<span>
+				<IconButton icon = 'edit' onClick = { () => onChange({target: {value: stuff.text /* omg */}}) } />
+				<IconButton icon = 'trash' onClick = { onTrash } />
+			</span>
+		);
+
+		content = (
+			<p> { stuff.text } </p>
+		);
+	}
+
 
 	return (
 		<Card>
-			<div className = 'stuff-card'>
-				<textarea value = { stuff.text } onChange = { onChange }/>
+			<div className = 'stuff-card-controls'>
+				{controls}
+			</div>
+			<div className = 'stuff-card-content'>
+				{content}
 			</div>
 		</Card>
 	);
@@ -74,8 +107,14 @@ export function StuffGrid(props) {
 
 	for (var k in state.stuffs) {
 		let stuff = state.stuffs[k];
+		let pendingStuff = state.stuffsPendingUpdate[k];
 		cards.push((
-			<StuffCard key={ stuff.id } stuff={ stuff } onChange = { event => store.dispatch(A.updateStuff(stuff.id, {text: event.target.value})) } />
+			<StuffCard key={ stuff.id } stuff={ stuff } pendingStuff = { pendingStuff }
+				onChange = { event => store.dispatch(A.changeStuff(stuff.id, event.target.value)) }
+				onRollback = { event => store.dispatch(A.rollbackStuff(stuff.id)) }
+				onCommit = { event => store.dispatch(A.updateStuff(stuff.id)) }
+				onTrash = { event => store.dispatch(A.destroyStuff(stuff.id)) }
+				/>
 		));
 	}
 	

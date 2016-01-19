@@ -1,6 +1,10 @@
 import * as API from './api';
 import store from './store';
 
+// dirty hacks
+export const CHANGE_STUFF = 'CHANGE_VALUE';
+export const ROLLBACK_STUFF = 'ROLLBACK_STUFF';
+
 export const PENDING = 'PENDING';
 export const OK = 'OK';
 export const FAILED = 'FAILED';
@@ -56,12 +60,28 @@ export function readStuff() {
 
 export const UPDATE_STUFF = 'UPDATE_STUFF';
 
-export function updateStuff(id, values) {
-	return dispatch => asd(API.updateStuff(id, values), dispatch, UPDATE_STUFF, 'stuff', readStuff(), id);
+export function updateStuff(id) {
+	return (dispatch, getState) => asd(API.updateStuff(id, {text: getState().stuffsPendingUpdate[id].text}), dispatch, UPDATE_STUFF, 'stuff', readStuff(), id);
+}
+
+export function changeStuff(id, text) {
+	console.log("CHANGE_STUFF", id, text);
+	return {
+		type: CHANGE_STUFF,
+		id,
+		text
+	};
+}
+
+export function rollbackStuff(id) {
+	return {
+		type: ROLLBACK_STUFF,
+		id
+	};
 }
 
 export const DESTROY_STUFF = 'DESTROY_STUFF';
 
 export function destroyStuff(id) {
-	return dispatch => asd(API.DESTROYStuff(id), dispatch, DESTROY_STUFF, 'stuff', readStuff(), id);
+	return dispatch => asd(API.destroyStuff(id), dispatch, DESTROY_STUFF, 'stuff', readStuff(), id);
 }
