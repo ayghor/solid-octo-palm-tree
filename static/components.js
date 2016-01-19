@@ -49,11 +49,11 @@ function NewStuffCard(props) {
 }
 
 function StuffCard(props) {
-	var { id, text } = props;
+	var { id, stuff } = props;
 
 	return (
 		<Card>
-			<textarea value = { text } />
+			<textarea value = { stuff.text } />
 		</Card>
 	);
 }
