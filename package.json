@@ -36,9 +36,6 @@
     "browserify": "^13.0.0"
   },
   "browserify": {
-    "extension": [
-      "jsx"
-    ],
     "transform": [
       [
         "babelify",
