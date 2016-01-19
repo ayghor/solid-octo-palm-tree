@@ -53,9 +53,7 @@ function StuffCard(props) {
 
 	return (
 		<Card>
-			<textarea>
-				text
-			</textarea>
+			<textarea value = { text } />
 		</Card>
 	);
 }
