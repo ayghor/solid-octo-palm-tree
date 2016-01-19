@@ -30,7 +30,11 @@ function Card(props) {
 	return (
 		<div className="col-xs-4">
 			<div className="thumbnail">
-				{props.children}
+				<div className='ar-wrapper'>
+					<div className='ar-main'>
+						{props.children}
+					</div>
+				</div>
 			</div>
 		</div>
 	);
@@ -41,7 +45,7 @@ function NewStuffCard(props) {
 
 	return (
 		<Card>
-			<h1 className="text-center">
+			<h1 className = 'new-stuff-card'>
 				<IconButton icon="plus" onClick={ onClick } />
 			</h1>
 		</Card>
@@ -53,7 +57,9 @@ function StuffCard(props) {
 
 	return (
 		<Card>
-			<textarea value = { stuff.text } onChange = { onChange }/>
+			<div className = 'stuff-card'>
+				<textarea value = { stuff.text } onChange = { onChange }/>
+			</div>
 		</Card>
 	);
 }

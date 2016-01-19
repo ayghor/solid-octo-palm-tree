@@ -1,22 +1,48 @@
-.ar_wrapper {
-  display: inline-block;
-  position: relative;
-}
-
-.ar_4_3_wrapper:after {
-  padding-top: 75%;
-  display: block;
-  content: '';
-}
-
-.asd {
+.ar-wrapper {
 	width: 100%;
-	background: black;
+	display: inline-block;
+	position: relative;
+	//background: red;
 }
 
-textarea {
+.ar-wrapper:after {
+	padding-top: 75%;
+	display: block;
+	content: '';
+	//background: green;
+}
+
+.ar-main {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	//background: blue;
+}
+
+.new-stuff-card {
+	font-size: 300%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -.5em;
+	margin-left: -.5em;
+	//background: yellow;
+}
+
+.stuff-card {
+	width: 100%;
+	height: 100%;
+}
+
+
+.stuff-card textarea {
 	border-style: none;
 	border-color: Transparent;
 	overflow: auto;
 	outline: none;
+	width: 100%;
+	height: 100%;
+	//background: red;
 }
