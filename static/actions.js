@@ -7,13 +7,14 @@ export const FAILED = 'FAILED';
 
 var nextRequestId = 1;
 
-function asd(p, dispatch, T, k, successAction = undefined) {
+function asd(p, dispatch, T, k, successAction = undefined, id = undefined) {
 	var requestId = nextRequestId++;
 	
 	dispatch({
 		type: T,
 		status: PENDING,
-		requestId
+		requestId,
+		id
 	});
 
 	return p.then(function (res) {
@@ -21,7 +22,8 @@ function asd(p, dispatch, T, k, successAction = undefined) {
 			dispatch({
 				type: T,
 				status: FAILED,
-				requestId
+				requestId,
+				id
 			});
 		
 		else
@@ -30,7 +32,8 @@ function asd(p, dispatch, T, k, successAction = undefined) {
 					type: T,
 					status: OK,
 					[k]: j,
-					requestId
+					requestId,
+					id
 				});
 
 				if (successAction)
@@ -54,11 +57,11 @@ export function readStuff() {
 export const UPDATE_STUFF = 'UPDATE_STUFF';
 
 export function updateStuff(id, values) {
-	return dispatch => asd(API.updateStuff(id, values), dispatch, UPDATE_STUFF, 'stuff', readStuff());
+	return dispatch => asd(API.updateStuff(id, values), dispatch, UPDATE_STUFF, 'stuff', readStuff(), id);
 }
 
 export const DESTROY_STUFF = 'DESTROY_STUFF';
 
 export function destroyStuff(id) {
-	return dispatch => asd(API.DESTROYStuff(id), dispatch, DESTROY_STUFF, 'stuff', readStuff());
+	return dispatch => asd(API.DESTROYStuff(id), dispatch, DESTROY_STUFF, 'stuff', readStuff(), id);
 }

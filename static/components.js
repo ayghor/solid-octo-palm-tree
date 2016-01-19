@@ -49,11 +49,11 @@ function NewStuffCard(props) {
 }
 
 function StuffCard(props) {
-	var { id, stuff } = props;
+	var { id, stuff, onChange } = props;
 
 	return (
 		<Card>
-			<textarea value = { stuff.text } />
+			<textarea value = { stuff.text } onChange = { onChange }/>
 		</Card>
 	);
 }
@@ -67,9 +67,9 @@ export function StuffGrid(props) {
 	var cards = [];
 
 	for (var k in state.stuffs) {
-		var stuff = state.stuffs[k];
+		let stuff = state.stuffs[k];
 		cards.push((
-			<StuffCard key={ stuff.id } stuff={ stuff } />
+			<StuffCard key={ stuff.id } stuff={ stuff } onChange = { event => store.dispatch(A.updateStuff(stuff.id, {text: event.target.value})) } />
 		));
 	}
 	
