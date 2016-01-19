@@ -4,7 +4,7 @@ import { StuffGrid } from './components';
 import { store } from './store';
 import * as A from './actions';
 
-//store.dispatch(A.createStuff('asd'));
+store.dispatch(A.readStuff());
 
 function render() {
 	return ReactDOM.render(
