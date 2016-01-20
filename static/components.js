@@ -28,7 +28,7 @@ function IconButton(props) {
 
 function Card(props) {
 	return (
-		<div className="col-xs-4">
+		<div className="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 			<div className="thumbnail">
 				<div className='ar-wrapper'>
 					<div className='ar-main'>
