@@ -58,13 +58,14 @@ function StuffCard(props) {
 
 	console.log('pendingStuff', pendingStuff);
 
+	var onClickA, onClickB, iconA, iconB;
+
 	if (pendingStuff && pendingStuff.dirty) {
-		controls = (
-			<span>
-				<IconButton icon = 'ok' onClick = { onCommit } />
-				<IconButton icon = 'remove' onClick = { onRollback } />
-			</span>
-		);
+		iconA = 'ok';
+		onClickA = onCommit;
+
+		iconB = 'remove';
+		onClickB = onRollback;
 
 		content = (
 			<textarea value = { pendingStuff.text } onChange = { onChange } />
@@ -72,12 +73,11 @@ function StuffCard(props) {
 	}
 
 	else {
-		controls = (
-			<span>
-				<IconButton icon = 'edit' onClick = { () => onChange({target: {value: stuff.text /* omg */}}) } />
-				<IconButton icon = 'trash' onClick = { onTrash } />
-			</span>
-		);
+		iconA = 'edit';
+		onClickA = () => onChange({target: {value: stuff.text /* omg */}});
+
+		iconB = 'trash';
+		onClickB = onTrash;
 
 		content = (
 			<p> { stuff.text } </p>
@@ -88,7 +88,17 @@ function StuffCard(props) {
 	return (
 		<Card>
 			<div className = 'stuff-card-controls'>
-				{controls}
+				<span className = 'pull-left'>
+					<IconButton icon = { iconA } onClick = { onClickA } />
+				</span>
+
+				<span>
+					{ '#' + stuff.id }
+				</span>
+
+				<span className = 'pull-right'>
+					<IconButton icon = { iconB } onClick = { onClickB } />
+				</span>
 			</div>
 			<div className = 'stuff-card-content'>
 				{content}
