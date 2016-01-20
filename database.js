@@ -1,5 +1,9 @@
 var pgp = require("pg-promise")();
-var db = pgp('/tmp');
+
+var url = process.env.DATABASE_URL;
+url = url ? url : '/tmp';
+
+var db = pg(url);
 
 function createStuff(text) {
 	return db.one('insert into stuff (text) values (${text}) returning *;', {text: text});
