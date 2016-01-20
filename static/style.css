@@ -40,6 +40,9 @@
 .stuff-card-content {
 	width: 100%;
 	height: calc(100% - 2em);
+	overflow: hidden;
+	white-space: pre;
+	
 }
 
 

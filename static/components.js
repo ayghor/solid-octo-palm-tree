@@ -79,9 +79,7 @@ function StuffCard(props) {
 		iconB = 'trash';
 		onClickB = onTrash;
 
-		content = (
-			<p> { stuff.text } </p>
-		);
+		content = stuff.text;
 	}
 
 
