@@ -37,7 +37,7 @@ function asd(p, dispatch, T, k, successAction = undefined, id = undefined) {
 					status: OK,
 					[k]: j,
 					requestId,
-					id
+					id: id ? id : j.id
 				});
 
 				if (successAction)

@@ -53,6 +53,23 @@ function stuffsPendingCreate(state = 0, action) {
 function stuffPendingUpdate(state = {}, action) {
 	switch (action.type) {
 
+	case A.CREATE_STUFF:
+		switch (action.status) {
+
+		case A.OK:
+
+			console.log("ASDASDASD", action);
+
+			return {
+				...state,
+				dirty: true,
+				text: action.stuff.text
+			};
+
+		default:
+			break;
+		}
+
 	case A.CHANGE_STUFF:
 
 		return {
@@ -99,18 +116,16 @@ function stuffPendingUpdate(state = {}, action) {
 function stuffsPendingUpdate(state = {}, action) {
 	switch (action.type) {
 
-	case A.CHANGE_STUFF:
-	case A.ROLLBACK_STUFF:
-	case A.UPDATE_STUFF:
-		var nextState = {
-			...state,
-			[action.id]: stuffPendingUpdate(state[action.id], action)
-		};
+	default:
+		console.log("STUFFS PENDING UPDATE", state);
 
-		if (nextState[action.id] === undefined)
-			delete nextState[action.id];
+		let pendingStuff = stuffPendingUpdate(state[action.id], action);
 
-		return nextState;
+		if (pendingStuff !== state[action.id])
+			return {
+				...state,
+				[action.id]: pendingStuff
+			};
 
 	}
 	return state;
