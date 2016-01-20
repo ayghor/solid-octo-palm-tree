@@ -41,7 +41,7 @@
 	width: 100%;
 	height: calc(100% - 2em);
 	overflow: hidden;
-	white-space: pre;
+	white-space: pre-wrap;
 	
 }
 
