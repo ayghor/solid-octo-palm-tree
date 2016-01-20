@@ -56,7 +56,7 @@ function StuffCard(props) {
 	var { id, stuff, pendingStuff, onChange, onRollback, onCommit, onTrash } = props;
 	var controls, content;
 
-	console.log('pendingStuff', pendingStuff);
+	//console.log('pendingStuff', pendingStuff);
 
 	var onClickA, onClickB, iconA, iconB;
 
@@ -109,7 +109,7 @@ export function StuffGrid(props) {
 	var { store } = props;
 	var state = store.getState();
 
-	console.log(state);
+	//console.log(state);
 
 	var cards = [];
 

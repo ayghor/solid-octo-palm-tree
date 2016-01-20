@@ -14,12 +14,12 @@ function stuffs(state = {}, action) {
 				var nextState = {};
 				action.stuffs.forEach(x => nextState[x.id] = x);
 
-				console.log('refreshed');
+				//console.log('refreshed');
 
 				return nextState;
 				
 			case A.FAILED:
-				console.log('failed to refresh');
+				//console.log('failed to refresh');
 
 			case A.PENDING:
 
@@ -36,7 +36,7 @@ function stuffsPendingCreate(state = 0, action) {
 		switch (action.status) {
 
 		case A.FAILED:
-			console.log("failed to create stuff");
+			//console.log("failed to create stuff");
 
 		case A.OK:
 				return state - 1;
@@ -72,7 +72,7 @@ function stuffPendingUpdate(state = {}, action) {
 		switch (action.status) {
 
 			case A.OK:
-				console.log('updated stuff ' + action.id);
+				//console.log('updated stuff ' + action.id);
 
 				return {
 					...state,
@@ -88,7 +88,7 @@ function stuffPendingUpdate(state = {}, action) {
 				}
 
 			case A.FAILED:
-				console.log('failed to update stuff ' + action.id);
+				//console.log('failed to update stuff ' + action.id);
 
 		}
 

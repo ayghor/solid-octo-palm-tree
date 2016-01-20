@@ -65,7 +65,7 @@ export function updateStuff(id) {
 }
 
 export function changeStuff(id, text) {
-	console.log("CHANGE_STUFF", id, text);
+	//console.log("CHANGE_STUFF", id, text);
 	return {
 		type: CHANGE_STUFF,
 		id,
