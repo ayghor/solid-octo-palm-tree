@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
-var port = 3000
+var port = process.env.PORT
+port = port ? port : 3000;
 
 var api = require('./api');
 var concat = require('concat-stream');
