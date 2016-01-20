@@ -4,7 +4,12 @@ import { StuffGrid } from './components';
 import { store } from './store';
 import * as A from './actions';
 
-store.dispatch(A.readStuff());
+function autoUpdate() {
+	store.dispatch(A.readStuff());
+	setTimeout(autoUpdate, 1000);
+}
+
+autoUpdate();
 
 function render() {
 	return ReactDOM.render(
