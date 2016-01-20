@@ -58,7 +58,7 @@ function stuffPendingUpdate(state = {}, action) {
 
 		case A.OK:
 
-			console.log("ASDASDASD", action);
+			//console.log("ASDASDASD", action);
 
 			return {
 				...state,
@@ -117,7 +117,7 @@ function stuffsPendingUpdate(state = {}, action) {
 	switch (action.type) {
 
 	default:
-		console.log("STUFFS PENDING UPDATE", state);
+		//console.log("STUFFS PENDING UPDATE", state);
 
 		let pendingStuff = stuffPendingUpdate(state[action.id], action);
 
