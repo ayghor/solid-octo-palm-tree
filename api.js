@@ -12,6 +12,9 @@ function asd(p, res) {
 	p.then((s) => (s ? res : res.status(404)).send(s)).catch(() => res.status(503).send(null));
 }
 
+api.delete('/stuffs/table', (req, res) => asd(db.dropStuffTable(), res));
+api.post('/stuffs/table', (req, res) => asd(db.createStuffTable(), res));
+
 api.post('/stuffs', (req, res) => asd(db.createStuff(req.body), res));
 api.get('/stuffs', (req, res) => asd(db.readAllStuff(), res));
 api.get('/stuffs/:id', (req, res) => asd(db.readStuff(req.params.id), res));
